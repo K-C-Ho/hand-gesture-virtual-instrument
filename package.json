@@ -1,0 +1,21 @@
+{
+  "name": "hand-gesture-virtual-instrument",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "prod": "cross-env NODE_ENV=production node server.js",
+    "compute-sri": "node scripts/compute_sri.js",
+    "vendor:fetch": "node scripts/fetch_vendors.js && node scripts/fetch_wasm.js",
+    "vendor:build": "node scripts/build_vendor_bundle.js",
+    "inspect:wasm": "node scripts/inspect_wasm.js"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.2"
+  }
+}

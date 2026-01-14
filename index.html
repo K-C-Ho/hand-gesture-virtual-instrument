@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hand Gesture Virtual Instrument</title>
+  <!-- CSP is delivered by the server to allow per-request nonces and stricter policies. -->
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎵 Hand Gesture Virtual Instrument</h1>
+
+    <div class="status">
+      <span class="status-indicator inactive" id="statusIndicator"></span>
+      <span class="status-text" id="statusText">Click Start to begin</span>
+    </div>
+
+    <div class="loading" id="loadingMsg">
+      ⏳ Loading MediaPipe hand tracking model...
+    </div>
+
+    <div class="current-note-display" id="noteDisplay">
+      <div class="note-label">Current Note</div>
+      <div class="note-value" id="currentNote">--</div>
+      <div class="frequency-value" id="currentFrequency">-- Hz</div>
+    </div>
+
+    <div class="video-container">
+      <video id="videoElement" autoplay playsinline></video>
+      <canvas id="canvas"></canvas>
+      <div class="sound-indicator" id="soundIndicator">
+        <div class="sound-wave"></div>
+        <span>♪ Playing</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">Hand Detected</div>
+        <div class="stat-value" id="handStatus">No</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">🔊 Sound</div>
+        <div class="stat-value" id="soundStatus">Off</div>
+      </div>
+      <div class="stat-card volume-dynamic">
+        <div class="stat-label">Dynamic Volume</div>
+        <div class="stat-value" id="dynamicVolume">100%</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Note Playing</div>
+        <div class="stat-value" id="noteZone">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">FPS</div>
+        <div class="stat-value" id="fpsCounter">0</div>
+      </div>
+    </div>
+
+    <div class="octave-display" id="octaveDisplay" style="display:none;">
+      <span>Octave Shift: <strong id="octaveValue">0</strong></span>
+      <span style="margin-left: 20px;">(Move hand closer/farther for octaves)</span>
+    </div>
+
+    <div class="audio-controls">
+      <h3>🎛️ Audio Controls</h3>
+      <div class="control-row">
+        <div class="control-label">Base Volume</div>
+        <div class="control-input">
+          <input type="range" id="volumeSlider" min="0" max="100" value="70">
+        </div>
+        <div class="control-value" id="volumeValue">70%</div>
+      </div>
+      <div class="control-row">
+        <div class="control-label">Waveform</div>
+        <div class="control-input">
+          <select id="waveformSelect">
+            <option value="sine">Sine (Smooth/Flute-like)</option>
+            <option value="triangle">Triangle (Mellow)</option>
+            <option value="square">Square (Retro/Chiptuney)</option>
+            <option value="sawtooth">Sawtooth (Bright/Buzzy)</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 5px; font-size: 13px; color: #856404;">
+        💡 <strong>Tip:</strong> Move your hand left/right to control volume dynamically! Center = normal, Left = quieter, Right = louder
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn" class="start">🎵 Start Instrument</button>
+      <button id="stopBtn" disabled>⏹️ Stop</button>
+      <button id="recordBtn" disabled>⏺️ Record</button>
+      <button id="playbackBtn" disabled>▶️ Playback</button>
+      <button id="clearBtn" disabled>🗑️ Clear Recording</button>
+    </div>
+
+    <div class="recording-info" id="recordingInfo" style="display:none; background:#fff3cd; border-left:4px solid #ffc107; padding:15px; border-radius:8px; margin-top:15px;">
+      <p id="recordingStatus" style="margin:0; color:#856404;"></p>
+    </div>
+
+    <div class="recorded-notes-container" id="recordedNotesContainer" style="display:none; background:white; border:2px solid #e0e7ff; border-radius:10px; padding:15px; margin-top:15px;">
+      <h3 style="margin:0 0 15px 0; color:#333; font-size:16px;">📋 Recorded Notes</h3>
+      <div style="display:flex; gap:10px; margin-bottom:15px; flex-wrap:wrap;">
+        <button id="selectAllBtn" style="background:#667eea; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-size:13px;">✓ Select All</button>
+        <button id="deselectAllBtn" style="background:#95a5a6; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-size:13px;">✗ Deselect All</button>
+        <button id="playSelectedBtn" style="background:#2ecc71; color:white; border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-size:13px;">▶️ Play Selected</button>
+      </div>
+      <div id="notesList" style="max-height:300px; overflow-y:auto; background:#f8f9fa; border-radius:5px; padding:10px;">
+        <p style="color:#999; text-align:center; padding:20px; margin:0;">No notes recorded yet</p>
+      </div>
+    </div>
+
+    <div class="error" id="errorBox">
+      <p id="errorText"></p>
+    </div>
+
+    <div class="info">
+      <h3>✨ Hand Gesture Virtual Instrument</h3>
+      <p>
+        <strong>Features:</strong><br>
+        ✓ Real-time hand tracking with gesture control<br>
+        ✓ Multi-octave support (move hand closer/farther)<br>
+        ✓ Dynamic volume control (left/right hand movement)<br>
+        ✓ Waveform selection (sine, triangle, square, sawtooth)<br>
+        ✓ Record and playback melodies with selection<br>
+        ✓ Visual effects (trails, note particles, pulsing zones)<br>
+        ✓ Optimized performance (dynamic frame skipping)<br>
+        <br>
+        <strong>Quick Start:</strong><br>
+        1. Click "Start Instrument" and allow camera access<br>
+        2. Move your finger up/down to play different notes<br>
+        3. Move your hand left/right to control volume<br>
+        4. Move hand closer/farther for octave shifts<br>
+        5. Record melodies and select notes to play back
+      </p>
+    </div>
+  </div>
+
+  <!-- Local vendor libraries (download with `npm run vendor:fetch`) -->
+  <script src="vendor/tone.js"></script>
+
+  <!-- MediaPipe Hands Libraries (local) -->
+  <script src="vendor/camera_utils.js"></script>
+  <script src="vendor/drawing_utils.js"></script>
+  <!-- Wrapper to redirect WASM loads to local /wasm/ before loading hands -->
+  <script src="src/hands_wrapper.js"></script>
+  <script src="vendor/hands.js"></script>
+  <script src="src/utils.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>
