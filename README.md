@@ -2,18 +2,18 @@
 
 A web-based musical instrument that lets you play notes by moving your hand in front of a webcam!
 
-## ✨ Features
+## Features
 
-- 🎵 **7-Note Scale** - Play C to B (C4-B4)
-- 🎹 **Multi-Octave Support** - Move hand closer/farther to shift octaves (-2 to +2)
-- 🎚️ **Dynamic Volume** - Hand position left-to-right controls volume (0.5x to 1.5x)
-- 🎛️ **Waveform Selection** - Choose sine, triangle, sawtooth, or square waves
-- 🎙️ **Recording & Playback** - Record your hand gestures and play them back
-- ✨ **Visual Effects** - Finger trails and particle effects
-- 🔒 **Secure** - Content Security Policy (CSP) with nonces, HTTPS-ready
-- 🌐 **Offline-Ready** - Works with local vendor files (no CDN dependencies)
+- **7-Note Scale** - Play C to B (C4-B4)
+- **Multi-Octave Support** - Move hand closer/farther to shift octaves (-2 to +2)
+- **Dynamic Volume** - Hand position left-to-right controls volume (0.5x to 1.5x)
+- **Waveform Selection** - Choose sine, triangle, sawtooth, or square waves
+- **Recording & Playback** - Record your hand gestures and play them back
+- **Visual Effects** - Finger trails and particle effects
+- **Secure** - Content Security Policy (CSP) with nonces, HTTPS-ready
+- **Offline-Ready** - Works with local vendor files (no CDN dependencies)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js (v14+) and npm
@@ -47,19 +47,7 @@ Then open **http://localhost:8080** in your browser!
 - Left side = quieter, right side = louder
 - All 7 notes light up as you move your hand
 
-## 📖 Documentation
-
-| Document | Purpose |
-|----------|---------|
-| **[ARCHITECTURE.md](ARCHITECTURE.md)** | How the app works, data flow, component breakdown |
-| **[MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md)** | Quick reference for common code changes |
-| **[SCRIPTS_GUIDE.md](SCRIPTS_GUIDE.md)** | npm scripts and utility scripts reference |
-| **[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)** | Navigation hub for all documentation |
-| **[DEPLOYMENT.md](DEPLOYMENT.md)** | Production deployment guide |
-| **[SECURITY.md](SECURITY.md)** | Security practices and implementation |
-| **[SECURITY_AUDIT.md](SECURITY_AUDIT.md)** | Security assessment results |
-
-## 📦 npm Scripts
+## npm Scripts
 
 ### Development & Testing
 ```bash
@@ -81,7 +69,7 @@ node tests.js           # Run unit tests
 # Then open http://localhost:8080/test-runner.html in browser
 ```
 
-## 🎮 How to Play
+## How to Play
 
 ### Controls
 - **Note Selection**: Move hand vertically (up/down)
@@ -106,39 +94,7 @@ node tests.js           # Run unit tests
 4. Click **"Playback"** to hear your recording
 5. Use **"Select All"** or **"Deselect All"** to choose which notes play back
 
-## 🛠️ Development
-
-### Project Structure
-```
-.
-├── index.html                    # Main HTML page
-├── server.js                     # Express.js server
-├── config.js                     # Environment configuration
-├── styles.css                    # CSS styling
-├── package.json                  # Dependencies
-│
-├── src/                          # Application code
-│   ├── app.js                    # Main app logic (1000+ lines)
-│   ├── utils.js                  # Shared utilities (UMD module)
-│   └── hands_wrapper.js          # WASM file redirection
-│
-├── scripts/                      # Build and utility scripts
-│   ├── fetch_vendors.js          # Download vendor libraries
-│   ├── fetch_wasm.js             # Download WASM modules
-│   ├── build_vendor_bundle.js    # Bundle vendors
-│   ├── compute_sri.js            # Calculate SRI hashes
-│   └── inspect_wasm.js           # Analyze WASM files
-│
-├── vendor/                       # Downloaded vendor files
-│   ├── tone.js                   # Audio synthesis library
-│   ├── camera_utils.js           # MediaPipe camera helper
-│   ├── drawing_utils.js          # MediaPipe drawing helper
-│   ├── hands.js                  # Hand detection model
-│   └── wasm/                     # WebAssembly modules
-│
-└── docs/                         # Documentation files
-    └── *.md                      # Guides and references
-```
+## Development
 
 ### Making Changes
 
@@ -163,16 +119,16 @@ Want to modify the app? See [MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md) for
 3. **Need to deploy?**
    - Follow [DEPLOYMENT.md](DEPLOYMENT.md) step-by-step
 
-## 🔐 Security
+## Security
 
 This app implements enterprise-grade security:
 
-- ✅ **Content Security Policy (CSP)** with nonce-based script injection
-- ✅ **HTTPS enforcement** (smart detection of reverse proxy)
-- ✅ **Security headers** (HSTS, X-Frame-Options, etc.)
-- ✅ **Subresource Integrity (SRI)** for vendor files
-- ✅ **Safe DOM practices** (no innerHTML)
-- ✅ **WASM security** (proper permissions and headers)
+- **Content Security Policy (CSP)** with nonce-based script injection
+- **HTTPS enforcement** (smart detection of reverse proxy)
+- **Security headers** (HSTS, X-Frame-Options, etc.)
+- **Subresource Integrity (SRI)** for vendor files
+- **Safe DOM practices** (no innerHTML)
+- **WASM security** (proper permissions and headers)
 
 See [SECURITY.md](SECURITY.md) and [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for details.
 
@@ -180,11 +136,11 @@ See [SECURITY.md](SECURITY.md) and [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for de
 
 | Browser | Version | Status |
 |---------|---------|--------|
-| Chrome | 90+ | ✅ Fully supported |
-| Firefox | 88+ | ✅ Fully supported |
-| Safari | 14+ | ✅ Fully supported |
-| Edge | 90+ | ✅ Fully supported |
-| Opera | 76+ | ✅ Fully supported |
+| Chrome | 90+ | Fully supported |
+| Firefox | 88+ | Fully supported |
+| Safari | 14+ | Fully supported |
+| Edge | 90+ | Fully supported |
+| Opera | 76+ | Fully supported |
 
 **Requirements**:
 - WebAssembly support
@@ -192,7 +148,7 @@ See [SECURITY.md](SECURITY.md) and [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for de
 - Web Audio API
 - WebRTC (camera access)
 
-## 🚀 Deployment
+## Deployment
 
 ### Quick Deployment Steps
 
@@ -241,7 +197,7 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed guides for:
 
 For more issues, see [SCRIPTS_GUIDE.md](SCRIPTS_GUIDE.md#troubleshooting).
 
-## 🎓 Learning Resources
+## Learning Resources
 
 This project is a great learning resource for:
 
@@ -252,7 +208,7 @@ This project is a great learning resource for:
 - **Modern JavaScript** - Async/await, events, DOM manipulation
 - **WebAssembly** - WASM module loading and execution
 
-## 📊 Performance
+## Performance
 
 - **FPS**: ~30 FPS (optimized for real-time response)
 - **Latency**: <100ms (hand detection to sound)
@@ -263,7 +219,7 @@ This project is a great learning resource for:
 
 Frame skipping enables smooth performance on slower devices.
 
-## 💡 Tips & Tricks
+## Tips & Tricks
 
 1. **Use headphones** for better audio quality
 2. **Good lighting** improves hand detection
@@ -271,7 +227,7 @@ Frame skipping enables smooth performance on slower devices.
 4. **Experiment with waveforms** - each has different sound quality
 5. **Record multiple takes** - select best one to play back
 
-## 👤 Contributing
+## Contributing
 
 Contributions welcome! To contribute:
 
@@ -281,15 +237,7 @@ Contributions welcome! To contribute:
 4. Add comments to new code
 5. Submit a pull request
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for code structure overview.
-
-## 📞 Support
-
-- **Documentation**: See the [docs/](docs/) folder
-- **Issues**: Check [SCRIPTS_GUIDE.md](SCRIPTS_GUIDE.md#troubleshooting)
-- **Security Issues**: See [SECURITY.md](SECURITY.md)
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Tone.js** - Audio synthesis library
 - **MediaPipe** - Hand detection and tracking
@@ -299,6 +247,6 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for code structure overview.
 ---
 
 **Current Version**: 0.1.0  
-**Status**: Production Ready ✅
+**Status**: Production Ready
 
 **Start playing**: `npm run dev` → http://localhost:8080
