@@ -94,31 +94,6 @@ node tests.js           # Run unit tests
 4. Click **"Playback"** to hear your recording
 5. Use **"Select All"** or **"Deselect All"** to choose which notes play back
 
-## Development
-
-### Making Changes
-
-Want to modify the app? See [MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md) for quick examples:
-
-- **Change note frequencies** → [MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md#change-note-frequencies)
-- **Change colors** → [MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md#change-note-colors)
-- **Adjust sensitivity** → [MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md#adjust-note-selection-sensitivity)
-- **Add custom sounds** → [MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md#audio--music)
-
-### Understanding the Code
-
-1. **New to the project?**
-   - Read [ARCHITECTURE.md](ARCHITECTURE.md) → "How the App Works"
-   - Takes ~30 minutes to understand the basics
-
-2. **Want to modify something?**
-   - Find your task in [MODIFICATIONS_GUIDE.md](MODIFICATIONS_GUIDE.md)
-   - Follow the code example
-   - Check source file comments for context
-
-3. **Need to deploy?**
-   - Follow [DEPLOYMENT.md](DEPLOYMENT.md) step-by-step
-
 ## Security
 
 This app implements enterprise-grade security:
@@ -129,18 +104,6 @@ This app implements enterprise-grade security:
 - **Subresource Integrity (SRI)** for vendor files
 - **Safe DOM practices** (no innerHTML)
 - **WASM security** (proper permissions and headers)
-
-See [SECURITY.md](SECURITY.md) and [SECURITY_AUDIT.md](SECURITY_AUDIT.md) for details.
-
-## 📱 Browser Compatibility
-
-| Browser | Version | Status |
-|---------|---------|--------|
-| Chrome | 90+ | Fully supported |
-| Firefox | 88+ | Fully supported |
-| Safari | 14+ | Fully supported |
-| Edge | 90+ | Fully supported |
-| Opera | 76+ | Fully supported |
 
 **Requirements**:
 - WebAssembly support
@@ -166,36 +129,18 @@ npm run vendor:build
 NODE_ENV=production npm start
 ```
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed guides for:
-- **Heroku**, **AWS**, **DigitalOcean**, **Vercel**
-- **Docker** deployment
-- **Nginx** reverse proxy setup
-- **SSL/HTTPS** configuration
-
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Camera not detected
 - Check browser permissions (DevTools → Application → Permissions)
 - Verify camera works in other apps
 - Try a different browser
 
-### Hand not detected
-- Ensure good lighting
-- Try moving hand slowly
-- Check [SCRIPTS_GUIDE.md](SCRIPTS_GUIDE.md) → "Troubleshooting"
-
-### WASM loading errors
-- Run `npm run vendor:fetch` to download WASM files
-- Check browser DevTools Console for errors
-- See [SCRIPTS_GUIDE.md](SCRIPTS_GUIDE.md) → "Troubleshooting"
-
 ### Sound not working
 - Check volume slider (should be > 0%)
 - Verify browser audio permissions
 - Try different waveform
 - Check DevTools Console for errors
-
-For more issues, see [SCRIPTS_GUIDE.md](SCRIPTS_GUIDE.md#troubleshooting).
 
 ## Learning Resources
 
